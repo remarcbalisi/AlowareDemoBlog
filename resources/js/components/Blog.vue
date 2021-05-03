@@ -52,7 +52,9 @@
                     'parent_id': this.parent_id,
                 }
                 const {data} = await this.$http.post('/api/comments', payload)
-                this.comments.unshift(data.data)
+                // TODO: make it not request back to server e.g this.comments.unshift(data.data)
+                await this.getComments()
+
                 this.comment = ''
                 this.parent_id = null
                 this.reply_title = null
