@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-gray-100 font-extralight mt-20 mx-auto p-20 rounded-2xl text-justify text-xl w-1/2 flex">
+        <div id="comment-box" class="bg-gray-100 font-extralight mt-20 mx-auto p-20 rounded-2xl text-justify text-xl w-1/2 flex">
             <div class="w-3/5">
                 <img src="/images/left-quote.svg" alt="" class="opacity-20">
             </div>
@@ -13,7 +13,7 @@
             <div v-if="reply_title !== null" class="truncate w-2/3">
                 <span class="text-gray-400 text-sm">{{reply_title}}</span>
             </div>
-            <div id="comment-box" class="flex rounded shadow w-full">
+            <div class="flex rounded shadow w-full">
                 <input v-model="comment" type="text" placeholder="Comment.." class="flex-grow placeholder-gray-300 px-3 py-2 rounded-bl rounded-tl w-full">
                 <button v-on:click="postComments" class="bg-gray-100 px-4 rounded-br rounded-tr text-base">Comment</button>
             </div>
