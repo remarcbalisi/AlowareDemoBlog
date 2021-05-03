@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="font-extralight mx-auto px-20 py-5 text-justify text-xl w-1/2">
-            <comments v-on:reply-clicked="generateReply" :comments="comments"></comments>
+            <comments :comments="comments"></comments>
         </div>
 
     </div>
@@ -27,6 +27,7 @@
 
 <script>
     import Comments from "./Comments";
+    import {EventBus} from "../event-bus";
 
     export default {
         components: {Comments},
@@ -77,6 +78,7 @@
         created() {
             this.getComments()
             this.user = this.generateName()
+            EventBus.$on('reply-clicked', this.generateReply);
         }
     }
 </script>
