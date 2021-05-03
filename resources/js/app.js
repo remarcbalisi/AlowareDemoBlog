@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
+window.axios = require('axios');
 
+Vue.prototype.$http = window.axios;
 Vue.use(VueRouter)
 
 let app = new Vue({

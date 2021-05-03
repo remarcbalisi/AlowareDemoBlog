@@ -25,8 +25,9 @@ class CommentTest extends TestCase
 
     public function test_can_view_all_comments()
     {
+        $this->withoutExceptionHandling();
         $response = $this->getJson(route('comment.index'));
-        $response->assertJsonStructure(['data' => [['id', 'user', 'parent', 'content']]]);
+        $response->assertJsonStructure(['data' => [['id', 'user', 'parent', 'content', 'children']]]);
     }
 
     public function test_can_post_comment()
@@ -36,7 +37,7 @@ class CommentTest extends TestCase
             'user' => $this->faker->name,
         ];
         $response = $this->postJson(route('comment.store'), $payload);
-        $response->assertJsonStructure(['data' => ['id', 'user', 'parent', 'content']]);
+        $response->assertJsonStructure(['data' => ['id', 'user', 'parent', 'content', 'children']]);
     }
 
     public function test_can_post_comment_reply()
@@ -47,7 +48,7 @@ class CommentTest extends TestCase
             'parent_id' => $this->parentComment->id,
         ];
         $response = $this->postJson(route('comment.store'), $payload);
-        $response->assertJsonStructure(['data' => ['id', 'user', 'parent', 'content']]);
+        $response->assertJsonStructure(['data' => ['id', 'user', 'parent', 'content', 'children']]);
         $response->assertJsonFragment(['id' => $this->parentComment->id]);
     }
 }

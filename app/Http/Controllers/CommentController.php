@@ -11,7 +11,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        return CommentResource::collection(Comment::with('parent')->latest()->paginate());
+        return CommentResource::collection(Comment::with('parent', 'children')->latest()->paginate());
     }
 
     public function store(CommentPostRequest $request)

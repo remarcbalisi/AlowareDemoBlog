@@ -11,30 +11,25 @@
         </div>
         <div class="font-extralight mx-auto px-20 py-10 text-justify text-xl w-1/2">
             <div v-if="reply_title !== null" class="truncate w-2/3">
-                <span class="text-gray-400 text-sm">You're replying to Remarc Balisi's comment fdafdac fdscsafdsaacdas fasd fda fdaf afdafdsasfadsfdsafdasafadfdasfdafdfdfa </span>
+                <span class="text-gray-400 text-sm">{{reply_title}}</span>
             </div>
             <div class="flex rounded shadow w-full">
                 <input v-model="comment" type="text" placeholder="Comment.." class="flex-grow placeholder-gray-300 px-3 py-2 rounded-bl rounded-tl w-full">
                 <button v-on:click="postComments" class="bg-gray-100 px-4 rounded-br rounded-tr text-base">Comment</button>
             </div>
         </div>
-        <div v-for="comment in comments" v-if="comment.parent === null" class="font-extralight mx-auto px-20 py-5 text-justify text-xl w-1/2 flex">
-            <div>
-                <span class="font-medium text-sm">
-                    {{ comment.user }}
-                </span>
-                <p>{{ comment.content }}</p>
-                <div>
-                    <span v-on:click="generateReply(comment)" class="cursor-pointer font-medium text-gray-500 text-xs">Reply</span>
-                </div>
-            </div>
+        <div class="font-extralight mx-auto px-20 py-5 text-justify text-xl w-1/2">
+            <comments v-on:reply-clicked="generateReply" :comments="comments"></comments>
         </div>
 
     </div>
 </template>
 
 <script>
+    import Comments from "./Comments";
+
     export default {
+        components: {Comments},
         data() {
             return {
                 comments: {},
