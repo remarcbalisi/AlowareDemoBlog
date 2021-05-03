@@ -6,7 +6,7 @@
             </span>
             <p>{{ comment.content }}</p>
             <div>
-                <span v-on:click="triggerBus(comment)" class="cursor-pointer font-medium text-gray-500 text-xs">Reply</span>
+                <a href="#comment-box"><span v-on:click="triggerBus(comment)" class="cursor-pointer font-medium text-gray-500 text-xs">Reply</span></a>
             </div>
         </div>
         <div v-if="comment.children.length > 0" class="font-extralight mx-auto px-10 text-justify text-xl w-full">

@@ -13,7 +13,7 @@
             <div v-if="reply_title !== null" class="truncate w-2/3">
                 <span class="text-gray-400 text-sm">{{reply_title}}</span>
             </div>
-            <div class="flex rounded shadow w-full">
+            <div id="comment-box" class="flex rounded shadow w-full">
                 <input v-model="comment" type="text" placeholder="Comment.." class="flex-grow placeholder-gray-300 px-3 py-2 rounded-bl rounded-tl w-full">
                 <button v-on:click="postComments" class="bg-gray-100 px-4 rounded-br rounded-tr text-base">Comment</button>
             </div>
