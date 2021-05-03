@@ -38,4 +38,16 @@ class CommentTest extends TestCase
         $response = $this->postJson(route('comment.store'), $payload);
         $response->assertJsonStructure(['data' => ['id', 'user', 'parent', 'content']]);
     }
+
+    public function test_can_post_comment_reply()
+    {
+        $payload = [
+            'content' => $this->faker->paragraph,
+            'user' => $this->faker->name,
+            'parent_id' => $this->parentComment->id,
+        ];
+        $response = $this->postJson(route('comment.store'), $payload);
+        $response->assertJsonStructure(['data' => ['id', 'user', 'parent', 'content']]);
+        $response->assertJsonFragment(['id' => $this->parentComment->id]);
+    }
 }
