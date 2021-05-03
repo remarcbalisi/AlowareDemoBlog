@@ -11,13 +11,31 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class CommentTest extends TestCase
 {
     use RefreshDatabase;
+    use WithFaker;
+
+    protected $parentComment;
+    protected $replies;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->parentComment = factory(Comment::class)->create();
+        factory(Comment::class, 10)->create(['parent_id' => $this->parentComment->id]);
+    }
 
     public function test_can_view_all_comments()
     {
-        $parentComment = factory(Comment::class)->create();
-        factory(Comment::class, 10)->create(['parent_id' => $parentComment->id]);
         $response = $this->getJson(route('comment.index'));
+        $response->assertJsonStructure(['data' => [['id', 'user', 'parent', 'content']]]);
+    }
 
-        $response->assertJsonStructure(['data' => [['id', 'user', 'parent_id']]]);
+    public function test_can_post_comment()
+    {
+        $payload = [
+            'content' => $this->faker->paragraph,
+            'user' => $this->faker->name,
+        ];
+        $response = $this->postJson(route('comment.store'), $payload);
+        $response->assertJsonStructure(['data' => ['id', 'user', 'parent', 'content']]);
     }
 }

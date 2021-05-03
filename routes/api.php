@@ -14,3 +14,4 @@ use Illuminate\Http\Request;
 */
 
 Route::get('comments', 'CommentController@index')->name('comment.index');
+Route::post('comments', 'CommentController@store')->name('comment.store');
